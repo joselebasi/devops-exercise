@@ -16,6 +16,11 @@ jobs:
 
       - name: Build and push
         uses: docker/build-push-action@v3
+        #Use when you have the same name in the github repository
+        #with dockerhub repository
+        #repository: ${{ github.repository }}
+        tag_with_ref: true
+        tag_with_sha: true
         with:
           push: true
-          tags: joselebasi/repositoryone:latest
+          tags: joselebasi/repositoryone:${{ github.sha }}
