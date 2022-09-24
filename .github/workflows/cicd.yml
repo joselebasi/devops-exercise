@@ -19,8 +19,8 @@ jobs:
         #Use when you have the same name in the github repository
         #with dockerhub repository
         #repository: ${{ github.repository }}
-        tag_with_ref: true
-        tag_with_sha: true
+        #tag_with_ref: true
+        #tag_with_sha: true
         with:
           push: true
           tags: joselebasi/repositoryone:${{ github.sha }}
