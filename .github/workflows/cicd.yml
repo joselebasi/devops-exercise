@@ -28,7 +28,6 @@ jobs:
           tags: joselebasi/repositoryone:${{ github.sha }}
       
       - name: deploy to cluster
-      - uses: actions/checkout@master
         uses: steebchen/kubectl@v2.0.0
         with: # defaults to latest kubectl binary version
           config: ${{ secrets.KUBE_CONFIG_DATA }}
