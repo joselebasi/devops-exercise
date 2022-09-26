@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: devops-exercise
-  namespace: devops
+  #namespace: devops
 spec:
   replicas: 3
   selector:
@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: devops-exercise
-        image: gcr.io/google-samples/hello-app:1.0
+        image: joselebasi/repositoryone:3f36ac3817fa4539e1f380dae2b1c04ade998356
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
