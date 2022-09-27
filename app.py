@@ -1,24 +1,29 @@
-from flask import Flask,jsonify
+from warnings import catch_warnings
+from flask import Flask,jsonify,request
+import os
+from redis import Redis
+
 from multiprocessing import Value
 
-counter = Value('i', 0)
+redis = Redis(host=os.getenv('REDIS_HOST', 'localhost'),
+              port=os.getenv('REDIS_PORT', 6379))
 app = Flask(__name__)
 
 @app.route("/")
 def hello():
-    return "This is my test ABRAXAS!!!"
+    return {"path":"root","version":"1.4"}
 
-@app.route('/getcounter')
+@app.route('/getcounter',methods = ['POST', 'GET'])
 def getcounter():
-    out = counter.value
-    return jsonify(count=out)
-
-@app.route("/postrequest", methods=["POST"])
-def postrequest():
-    with counter.get_lock():
-        counter.value += 1
-        out = counter.value
-    return {"status":"Ok"}
+    if request.method == 'POST':
+        redis.incr('counter')
+        return {"status":"ok"}
+    else:
+        try:
+            hits = int(redis.get('counter'))
+        except:
+            return jsonify(count=0)   
+    return jsonify(count=hits)
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=5000)
