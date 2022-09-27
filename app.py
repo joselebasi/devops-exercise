@@ -5,8 +5,10 @@ from redis import Redis
 
 from multiprocessing import Value
 
-redis = Redis(host=os.getenv('REDIS_HOST', 'localhost'),
-              port=os.getenv('REDIS_PORT', 6379))
+#redis = Redis(host=os.getenv('REDIS_HOST', 'redis-service'),
+#              port=os.getenv('REDIS_PORT', 30001))
+redis = Redis(host=os.getenv('REDIS_HOST', 'redis-service'),
+              port=os.getenv('REDIS_PORT', 30001))
 app = Flask(__name__)
 
 @app.route("/")
