@@ -15,5 +15,13 @@ spec:
       containers:
       - name: redis
         image: redis
+        command: ["redis-server"]
+        args: ["--save 60 1", "--loglevel warning"]
         ports:
         - containerPort: 6379
+        volumeMounts:
+        - name: redisvolume
+          mountPath: /data
+      volumes:
+      - name: redisvolume
+        
