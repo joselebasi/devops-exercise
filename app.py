@@ -7,9 +7,13 @@ from multiprocessing import Value
 
 #redis = Redis(host=os.getenv('REDIS_HOST', 'redis-service'),
 #              port=os.getenv('REDIS_PORT', 30001))
-redis = Redis(host=os.getenv('REDIS_HOST', 'redis'),
-              port=os.getenv('REDIS_PORT', 6379),
-              password=os.getenv('REDIS_PASS', 'a-very-complex-password-here'),
+
+evhost = os.getenv('REDIS_HOST', 'redis')
+evport = os.getenv('REDIS_PORT', 6379)
+evpass = os.getenv('REDIS_PASS', 'a-very-complex-password-here')
+redis = Redis(host=evhost,
+              port=evport,
+              password=evpass,
               )
 
 app = Flask(__name__)
@@ -18,6 +22,12 @@ developer=os.getenv('NAME_DEV', 'default value')
 
 @app.route("/")
 def hello():
+    print("REDIS CONEXION")
+    print("--------------")
+    print("host:"+evhost)
+    print("port:"+evport)
+    print("pass:"+evpass)
+    print("--------------")
     return {"path":"/","version":"1.8","pod-name":pod_name,"name-dev":developer}
 
 @app.route('/getcounter',methods = ['POST', 'GET'])
