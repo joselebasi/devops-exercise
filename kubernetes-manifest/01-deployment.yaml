@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: devops-exercise
-        image: joselebasi/repositoryone:3f36ac3817fa4539e1f380dae2b1c04ade998356
+        image: joselebasi/repositoryone:41ba337c68e88736100611d0832dab30b6f8f56a
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
@@ -24,3 +24,20 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
+        - name: REDIS_HOST
+          valueFrom:
+            secretKeyRef:
+              name: redis-credentials
+              key: host
+        - name: REDIS_PASS
+          valueFrom:
+            secretKeyRef:
+              name: redis-credentials
+              key: password
+        - name: REDIS_PORT
+          value: "6379"
+        - name: NAME_DEV
+          valueFrom:
+            configMapKeyRef:
+              name: app-python-cfm
+              key: name_dev

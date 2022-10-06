@@ -4,11 +4,11 @@ metadata:
   name: devops-service
   #namespace: devops
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: devops-exercise
   ports:
   - port: 5000
     targetPort: 5000
-    nodePort: 30000
+ #   nodePort: 30000
 
