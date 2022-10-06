@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: devops-exercise
-        image: joselebasi/repositoryone:e81251d0438eda5d05722a8558d15c2c26129fb9
+        image: joselebasi/repositoryone:068cddf7b08dada1aa5c4ddbde49045decaf6cd7
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
@@ -24,18 +24,6 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
-        - name: REDIS_HOST
-          valueFrom:
-            secretKeyRef:
-              name: redis-credentials
-              key: host
-        - name: REDIS_PASS
-          valueFrom:
-            secretKeyRef:
-              name: redis-credentials
-              key: password
-        - name: REDIS_PORT
-          value: "6379"
         - name: NAME_DEV
           valueFrom:
             configMapKeyRef:

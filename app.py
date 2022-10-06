@@ -12,7 +12,7 @@ evhost = os.getenv('REDIS_HOST', 'redis')
 evport = os.getenv('REDIS_PORT', 6379)
 evpass = os.getenv('REDIS_PASS', 'a-very-complex-password-here')
 redis = Redis(host=evhost,
-              port=evport,
+              port=int(evport),
               password=evpass,
               )
 
