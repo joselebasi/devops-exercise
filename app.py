@@ -11,9 +11,9 @@ from multiprocessing import Value
 evhost = os.getenv('REDIS_HOST', 'redis')
 evport = os.getenv('REDIS_PORT', 6379)
 evpass = os.getenv('REDIS_PASS', 'a-very-complex-password-here')
-redis = Redis(host=evhost,
-              port=int(evport),
-              password=evpass,
+redis = Redis(host=os.getenv('REDIS_HOST', 'redis'),
+              port=6379,
+              password=os.getenv('REDIS_PASS', 'a-very-complex-password-here'),
               )
 
 app = Flask(__name__)
