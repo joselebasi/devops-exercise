@@ -43,7 +43,7 @@ def getcounter():
 
 
 @app.route('/restart',methods = ['POST'])
-def getcounter():
+def setrestart():
     redis.set('counter',0)
     
 if __name__ == "__main__":
