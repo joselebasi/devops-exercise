@@ -27,7 +27,7 @@ def hello():
     print("port:"+evport)
     print("pass:"+evpass)
     print("--------------")
-    return {"path":"/","version":"1.8","pod-name":pod_name,"name-dev":developer}
+    return {"path":"/","version":"1.11","pod-name":pod_name,"name-dev":developer}
 
 @app.route('/getcounter',methods = ['POST', 'GET'])
 def getcounter():
