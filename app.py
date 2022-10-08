@@ -35,8 +35,11 @@ def getcounter():
         redis.incr('counter')        
         return {"method":"POST","status":"ok","pod-name":pod_name,"name-dev":developer}
     else:
+        hits = 0
         try:
-            hits = int(redis.get('counter'))
+            if redis.exists('counter'):
+                print('Key -counter- exists:')
+                hits = int(redis.get('counter'))
         except:
             return {"method":"GET","error":"Connection to redis does not resolve","pod-name":pod_name,"name-dev":developer}  
     return {"method":"GET","count":hits,"pod-name":pod_name,"name-dev":developer}
@@ -44,7 +47,7 @@ def getcounter():
 
 @app.route('/restart',methods = ['POST'])
 def setrestart():
-    redis.set('counter',0)
+    redis.delete('counter')
     print("COUNTER RESTARTED")
     
 if __name__ == "__main__":

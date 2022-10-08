@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: devops-exercise
-        image: joselebasi/repositoryone:0ceac585be8b29c323ac929638a318900942186b
+        image: joselebasi/repositoryone:d9d6919afc5a58bab16318e23c905d1fa0f11a87
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
