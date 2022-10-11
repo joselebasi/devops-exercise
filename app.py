@@ -10,12 +10,12 @@ app = Flask(__name__)
 #redis = Redis(host=os.getenv('REDIS_HOST', 'redis-service'),
 #              port=os.getenv('REDIS_PORT', 30001))
 
-evhost = os.getenv('REDIS_HOST', 'redis')
+evhost = os.getenv('REDIS_HOST', 'redis-service')
 evport = os.getenv('REDIS_PORT', 6379)
 pod_name=os.getenv('MY_POD_NAME', 'pod-01')
 developer=os.getenv('NAME_DEV', 'default value')
 evpass = os.getenv('REDIS_PASS', 'a-very-complex-password-here')
-redis = Redis(host='redis',
+redis = Redis(host='redis-service',
               port=6379,
               password='a-very-complex-password-here')
 
@@ -27,7 +27,7 @@ def hello():
     print("port:"+evport)
     print("pass:"+evpass)
     print("--------------")
-    return {"path":"/","version":"1.15","pod-name":pod_name,"name-dev":developer}
+    return {"path":"/","version":"1.16","pod-name":pod_name,"name-dev":developer}
 
 @app.route('/getcounter',methods = ['POST', 'GET'])
 def getcounter():    
@@ -47,8 +47,10 @@ def getcounter():
 
 @app.route('/restart',methods = ['POST'])
 def setrestart():
+    print("COUNTER DELETE")
     redis.delete('counter')
-    print("COUNTER RESTARTED")
+    return {"method":"GET","count":hits,"pod-name":pod_name,"name-dev":developer}
+    
     
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=5000)
